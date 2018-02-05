@@ -1,0 +1,72 @@
+---
+
+- name: Add ClickHouse repository apt-key
+  apt_key:
+    id: "{{ clickhouse_apt_key_id }}"
+    url: "{{ clickhouse_apt_key_url }}"
+
+
+- name: Add ClickHouse repository
+  apt_repository:
+    repo: "{{ clickhouse_apt_repository }}"
+
+
+- name: Install ClickHouse packages
+  apt:
+    name: "{{ item }}"
+    state: installed
+    update_cache: yes
+    cache_valid_time: 84600
+  with_items:
+    - "{{ clickhouse_apt_packages }}"
+
+
+- name: Create Zookeeper log directory
+  file:
+    path: /etc/clickhouse-server/conf.d
+    state: directory
+    group: '{{ clickhouse_system_group }}'
+    owner: '{{ clickhouse_system_user }}'
+    
+
+- name: ClickHouse configuration for macro
+  template: 
+    src: clickhouse_macro.xml.j2
+    dest: /etc/clickhouse-server/conf.d/clickhouse_macro.xml
+    owner: "{{ clickhouse_system_user }}"
+    group: "{{ clickhouse_system_group }}"
+    mode: 0644
+  notify:
+    - Restart ClickHouse
+
+
+- name: ClickHouse configuration for remote server
+  template: 
+    src: clickhouse_remote_servers.xml.j2
+    dest: /etc/clickhouse-server/conf.d/clickhouse_remote_servers.xml
+    owner: "{{ clickhouse_system_user }}"
+    group: "{{ clickhouse_system_group }}"
+    mode: 0644
+  notify:
+    - Restart ClickHouse
+
+
+- name: ClickHouse configuration for zookeeper
+  template: 
+    src: clickhouse_zookeeper.xml.j2
+    dest: /etc/clickhouse-server/conf.d/clickhouse_zookeeper.xml
+    owner: "{{ clickhouse_system_user }}"
+    group: "{{ clickhouse_system_group }}"
+    mode: 0644
+  notify:
+    - Restart ClickHouse
+
+- name: ClickHouse configuration for config.xml
+  template: 
+    src: clickhouse_config.xml.j2
+    dest: /etc/clickhouse-server/conf.d/clickhouse_config.xml
+    owner: "{{ clickhouse_system_user }}"
+    group: "{{ clickhouse_system_group }}"
+    mode: 0644
+  notify:
+    - Restart ClickHouse

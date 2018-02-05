@@ -1,0 +1,5 @@
+[clickhouse]
+host0.example.org ansible_host=host0.example.org ansible_user=root zookeeper_id=1
+host1.example.org ansible_host=host1.example.org ansible_user=root zookeeper_id=2
+host2.example.org ansible_host=host2.example.org ansible_user=root zookeeper_id=3
+host3.example.org ansible_host=host3.example.org ansible_user=root zookeeper_id=4

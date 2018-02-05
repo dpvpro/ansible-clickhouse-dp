@@ -1,0 +1,14 @@
+---
+
+- name: Restart ZooKeeper
+  # service:
+  #   name: zookeeper.service
+  #   state: restarted
+  command: /usr/share/zookeeper/bin/zkServer.sh restart
+
+
+- name: Restart ClickHouse
+  service:
+    name: clickhouse-server
+    state: restarted
+

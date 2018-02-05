@@ -1,0 +1,8 @@
+---
+
+- include_tasks: zookeeper.yml
+
+- include_tasks: clickhouse.yml
+
+
+

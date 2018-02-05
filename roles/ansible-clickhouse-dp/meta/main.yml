@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: DP
+  description: Install ClickHouse and Zookeeper
+  company: 
+  license: 
+  min_ansible_version: 2.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  categories:
+  - database
+dependencies: []

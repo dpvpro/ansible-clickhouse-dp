@@ -1,0 +1,40 @@
+---
+
+# -------- zookeeper
+
+zookeeper_group: zookeeper
+zookeeper_user: zookeeper
+
+
+zookeeper_apt_packages:
+  - zookeeperd
+  - zookeeper
+  - openjdk-8-jre-headless
+
+zookeeper_log_dir: /var/log/zookeeper
+
+# variables for templating zoo.cfg.j2
+zookeeper_data_dir: /var/lib/zookeeper
+zookeeper_data_log_dir: /var/lib/zookeeper
+zookeeper_client_port: 2181
+
+# /var/lib/zookeeper/myid file.
+zookeeper_id: 1
+
+zookeeper_leader_port: 2888
+zookeeper_election_port: 3888
+
+# -------- clickhouse
+
+clickhouse_apt_key_id: E0C56BD4
+clickhouse_apt_key_url: http://repo.yandex.ru/clickhouse/CLICKHOUSE-KEY.GPG
+clickhouse_apt_repository: "deb http://repo.yandex.ru/clickhouse/{{ ansible_distribution_release }} stable main"
+
+clickhouse_apt_packages:
+  - ca-certificates
+  - clickhouse-client
+  - clickhouse-server-common
+  - clickhouse-server-base
+
+clickhouse_system_user:  clickhouse
+clickhouse_system_group: clickhouse

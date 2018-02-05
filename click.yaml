@@ -1,0 +1,4 @@
+---
+- hosts: clickhouse
+  roles:
+     - ansible-clickhouse-dp

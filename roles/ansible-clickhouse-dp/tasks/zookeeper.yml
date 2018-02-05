@@ -1,0 +1,63 @@
+---
+
+# /usr/share/zookeeper/ is the default bin folder ZooKeeper will use when starting
+- name: Install Zookeeper and Java
+  apt: 
+    name: "{{ item }}"
+    state: installed
+    update_cache: yes
+    cache_valid_time: 86400
+  # become: true
+  with_items:
+    - "{{ zookeeper_apt_packages }}"
+
+
+- name: Create directory for snapshot files and myid file
+  file:
+    path: '{{ zookeeper_data_dir }}'
+    state: directory
+    group: '{{ zookeeper_group }}'
+    owner: '{{ zookeeper_user }}'
+
+
+- name: Create directory for transaction log files
+  file:
+    path: '{{ zookeeper_data_log_dir }}'
+    state: directory
+    group: '{{ zookeeper_group }}'
+    owner: '{{ zookeeper_user }}'
+
+
+- name: Create Zookeeper log directory
+  file:
+    path: '{{ zookeeper_log_dir }}'
+    state: directory
+    group: '{{ zookeeper_group }}'
+    owner: '{{ zookeeper_user }}'
+
+
+# /etc/zookeeper/conf/zoo.cfg is the default file ZooKeeper will use when starting
+- name: Template configuration file to zoo.cfg
+  template:
+    src: zoo.cfg.j2
+    dest: /etc/zookeeper/conf/zoo.cfg
+  notify:
+    - Restart ZooKeeper
+
+
+- name: Template myid to {{ zookeeper_data_dir }}/myid
+  template:
+    src: myid.j2
+    dest: '{{ zookeeper_data_dir }}/myid'
+  notify:
+    - Restart ZooKeeper
+
+
+- name: Start the ZooKeeper
+  # service:
+  #   name: zookeeper
+  #   state: started
+  #   enabled: yes
+  command: /usr/share/zookeeper/bin/zkServer.sh restart
+  check_mode: no
+

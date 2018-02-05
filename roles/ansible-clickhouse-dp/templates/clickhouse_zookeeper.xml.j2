@@ -1,0 +1,10 @@
+<yandex>
+  <zookeeper>
+{% for host in groups['clickhouse'] %}
+    <node>
+      <host>{{ hostvars[host]['ansible_host'] }}</host>
+      <port>2181</port>
+    </node>
+{% endfor %}
+  </zookeeper>
+</yandex>
