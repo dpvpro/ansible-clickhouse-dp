@@ -1,0 +1,41 @@
+ansible-playbook -i ansible_hosts click.yaml
+
+https://github.com/sleighzy/ansible-zookeeper
+
+https://github.com/kostiantyn-nemchenko/ansible-role-clickhouse
+
+http://apolianskiy.blogspot.ru/2014/09/zookeeper.html
+
+https://groups.google.com/forum/#!topic/clickhouse/L6ysbBHbT8M
+
+https://groups.google.com/forum/#!topic/clickhouse/0I7ohN8k5Ns
+
+https://groups.google.com/forum/#!topic/clickhouse/GFl04GsTNZg
+
+
+echo stat | nc 127.0.0.1 2181
+
+/usr/share/zookeeper/bin/zkServer.sh status
+
+/etc/clickhouse-server/conf.d
+/var/log/clickhouse-server/clickhouse-server.err.log
+/var/log/clickhouse-server/clickhouse-server.log
+
+service --status-all
+
+ssh root@host1.example.org
+
+CREATE DATABASE test;
+
+CREATE TABLE test.Migrations ( date Date DEFAULT toDate(now()), id UInt64, time UInt64) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{shard}/test/Migrations', '{replica}', date, (id, time), 8192);
+
+INSERT INTO test.Migrations (date) VALUES (689);
+INSERT INTO test.Migrations (date) VALUES (6896);
+INSERT INTO test.Migrations (date) VALUES (6898);
+INSERT INTO test.Migrations (date) VALUES (68999);
+INSERT INTO test.Migrations (date) VALUES (689345);
+
+SELECT * from test.Migrations;
+
+
+curl http://host1.example.org:9009
