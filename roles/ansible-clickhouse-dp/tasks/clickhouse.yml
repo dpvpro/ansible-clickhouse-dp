@@ -1,10 +1,9 @@
 ---
 
 - name: Add ClickHouse repository apt-key
-  apt_key:
+  ansible.builtin.apt_key:
     id: "{{ clickhouse_apt_key_id }}"
-    url: "{{ clickhouse_apt_key_url }}"
-
+    keyserver: "{{ clickhouse_apt_key_url }}"
 
 - name: Add ClickHouse repository
   apt_repository:

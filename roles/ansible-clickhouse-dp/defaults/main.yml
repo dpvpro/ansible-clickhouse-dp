@@ -26,9 +26,9 @@ zookeeper_election_port: 3888
 
 # -------- clickhouse
 
-clickhouse_apt_key_id: E0C56BD4
-clickhouse_apt_key_url: http://repo.yandex.ru/clickhouse/CLICKHOUSE-KEY.GPG
-clickhouse_apt_repository: "deb http://repo.yandex.ru/clickhouse/deb/stable/ main/"
+clickhouse_apt_key_id: 8919F6BD2B48D754
+clickhouse_apt_key_url: keyserver.ubuntu.com
+clickhouse_apt_repository: "deb https://packages.clickhouse.com/deb stable main"
 
 clickhouse_apt_packages:
   - ca-certificates
